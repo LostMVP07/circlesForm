@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>spin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(20, 20, 20);
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      height: 600px;
+      width: 600px;
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      
+    }
+    .container:hover {
+      #box1 {
+        border: solid teal 3px;
+        box-shadow: 0 0 30px teal;
+      }
+      #box2 {
+        border: solid coral 3px;
+        box-shadow: 0 0 30px coral;
+      }
+      #box3 {
+        border: solid gold 3px;
+        box-shadow: 0 0 30px gold;
+      }
+    }
+    .box {
+      height: 800px;
+      width: 800px;
+      animation: rotate infinite linear 5s;
+      position: absolute;
+      transition: 0.3s;
+      border: solid white 3px;
+      box-shadow: 0 0 30px white;
+      z-index: 1;
+      
+    }
+    #box1 {
+      border-radius: 50%;
+      border-top-left-radius: 70%;
+    }
+    #box2 {
+      border-radius: 60%;
+      border-bottom-right-radius: 60%;
+      border-bottom-left-radius: 50%;
+    }
+    #box3 {
+      border-radius: 40%;
+      border-bottom-left-radius: 60%;
+      border-top-right-radius: 50%;
+      animation-name: rotate2;
+    }
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes rotate2 {
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    h1 {
+      color: white;
+      font-size: 50px;
+      font-family: cursive;
+    }
+    .user-cont, .pass-cont{
+      width: 70%;
+      border-radius: 50px;
+      position: relative;
+      color: white;
+    }
+   
+    .icon-wrap{
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      font-size: 20px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 40px;
+      transform: 1s;
+    }
+   
+    #eyeSlash{
+      z-index: 1 !important;
+    }
+    #eye{
+      display: none;
+    }
+    .input {
+      height: 50px;
+      width: 100%;
+      padding-inline: 15px;
+      border-radius: 50px;
+      border: solid white 2px;
+      color: white;
+      font-size: 25px;
+      background-color: transparent;
+      outline: none;
+      transition: 0.3s;
+    }
+    
+    .input:focus{
+      box-shadow: 0 0 15px white;
+    }
+    #btn{
+      height: 50px;
+      width: 70%;
+      font-size: 1.5em;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(to right, rgb(120, 68, 199), rgb(55, 55, 235));
+      color: white;
+      transition: 0.3s;
+    }
+    #btn:hover{
+      transform: translateY(-2px);
+    }
+    #btn:active{
+      transform: translateY(2px);
+    }
+    .f-p-sign-up{
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+    }
+    a{
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    a:hover{
+      transform: translateY(-2px);
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div id="box1" class="box"></div>
+      <div id="box2" class="box"></div>
+      <div id="box3" class="box"></div>
+
+      <form action="#">
+        <h1>Login</h1>
+
+        <div class="user-cont"><input type="text" class="input" placeholder="Username" id="userInp"/> <div class="icon-wrap"><i class="fa-solid fa-user"></i></div></div>
+        <div class="pass-cont"><input type="password" class="input" placeholder="Password" id="passInp"/> <div id="slashWrap" class="icon-wrap"><i class="fa-solid fa-eye-slash" id="eyeSlash"></i></div>  <div id="eyeWrap" class="icon-wrap"> <i class="fa-solid fa-eye" id="eye"></i></div></div>
+        <button id="btn">Submit</button>
+        <div class="f-p-sign-up">
+          <a href="#">Forgot Password?</a>
+          <a href="#">Sign Up</a>
+        </div>
+      </form>
+    </div>
+
+
+    <script>
+      const eyeSlash = document.getElementById('eyeSlash')
+      const eye = document.getElementById('eye')
+      const passInp = document.getElementById('passInp')
+
+      eyeSlash.addEventListener('click', function(){
+          eyeSlash.style.display = 'none'
+          eye.style.display = 'block'
+          passInp.type = "text"
+
+        
+      })
+
+      eye.addEventListener('click', function(){
+        eye.style.display = 'none'
+        eyeSlash.style.display = 'block'
+        passInp.type = "password"
+
+      })
+    </script>
+  </body>
+</html>
